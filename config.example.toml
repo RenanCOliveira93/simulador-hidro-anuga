@@ -1,0 +1,17 @@
+[inputs]
+dem = "data/dem.tif"
+inlet_geojson = "data/inlet.geojson"
+hydrograph_csv = "data/hydrograph.csv"
+
+[model]
+# Target triangle area in m². Smaller values increase detail and cost.
+maximum_triangle_area_m2 = 900.0
+manning_n = 0.035
+duration_seconds = 86400.0
+yieldstep_seconds = 300.0
+# ANUGA's default DEM rectangle tags. Adjust for your actual model extent.
+boundary_tags = ["bottom", "right", "top", "left"]
+[output]
+directory = "output"
+label = "exploratory_scenario"
+
