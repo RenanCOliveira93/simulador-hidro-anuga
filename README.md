@@ -41,13 +41,13 @@ If ANUGA cannot be installed on the selected Python version, use one supported b
 5. Run:
 
 ```bash
-jurumirim-sim --config config.toml
+simulador-hidro --config config.toml
 ```
 
 ANUGA writes the simulation output under the configured output directory as `.sww`. View it interactively with `anuga_viewer` or QGIS' temporal mesh tools. To make an MP4 animation from the model output:
 
 ```bash
-jurumirim-animate output/exploratory_scenario.sww --output output/flood_depth.mp4
+simulador-animar output/exploratory_scenario.sww --output output/flood_depth.mp4
 ```
 
 MP4 export requires `ffmpeg`; GIF export can use Pillow. The animation shows the solver's time steps, not AI-generated interpolation. Preserve the config, input data provenance, software versions, and model logs with every result.
