@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jurumirim-anuga-linux"
+version = "0.1.0"
+description = "Linux-first ANUGA runner for transparent, user-specified flood-routing scenarios"
+requires-python = ">=3.11"
+dependencies = ["anuga>=4.0", "shapely>=2.0", "matplotlib>=3.7", "pillow>=10"]
+
+[project.scripts]
+jurumirim-sim = "jurumirim_sim.cli:main"
+jurumirim-animate = "jurumirim_sim.animate:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
