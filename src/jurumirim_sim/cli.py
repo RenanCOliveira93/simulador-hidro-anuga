@@ -95,6 +95,7 @@ def run(config_path: Path) -> Path:
         inlet_geometry = shape(geojson)
     if inlet_geometry.geom_type != "LineString" or inlet_geometry.is_empty:
         raise ValueError("The inlet geometry must be a non-empty GeoJSON LineString")
+    inlet_line = [list(point) for point in inlet_geometry.coords]
 
     output_dir = _resolve(base, output["directory"])
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -108,10 +109,11 @@ def run(config_path: Path) -> Path:
     domain.set_datadir(str(output_dir))
     domain.set_quantity("friction", float(model["manning_n"]))
     domain.set_quantity("stage", expression="elevation")
+    domain.set_collect_max_quantities()
 
     boundary = anuga.Transmissive_boundary(domain)
     domain.set_boundary({tag: boundary for tag in model["boundary_tags"]})
-    anuga.Inlet_operator(domain, inlet_geometry, Q=_interpolated_flow(times, flows),
+    anuga.Inlet_operator(domain, inlet_line, Q=_interpolated_flow(times, flows),
                          zero_velocity=True, label="user_supplied_hydrograph")
 
     duration = float(model["duration_seconds"])
