@@ -14,3 +14,5 @@ output/*
 *.stdout
 *.log
 
+.conda/
+output/

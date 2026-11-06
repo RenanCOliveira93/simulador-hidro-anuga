@@ -1,6 +1,8 @@
 # Prompt for continuing this project with Claude or Codex
 
-You are improving a Linux-only, reproducible ANUGA 2D shallow-water model starter for studying conditional flood-routing scenarios at UHE Jurumirim, UHE Paranapanema, and UHE Piraju and around Piraju, Brazil. The user expects to see the water move and spread over terrain in a physically based simulation, with a view or exportable animation, not an AI-generated video.
+State of the project (2026-11-06): the runner works on macOS (conda-forge ANUGA 4.1) and Linux; it can build a hydrograph from a prescribed released volume, overlay results on urban/rural land, and export 3D HTML and MP4. A first exploratory scenario (7,007.52 hm³ over 72 h from Jurumirim) is documented in `docs/RESULTADOS_JURUMIRIM_7007HM3.md`. Still open: sensitivity/ensemble, mass-balance check at the boundaries, finer mesh around Piraju, dam structures (Paranapanema, Piraju) beyond "terrain", tests, and hydraulic-engineer review. The user chose NOT to sweep emptying times for now.
+
+You are improving a reproducible ANUGA 2D shallow-water model starter (Linux and macOS) for studying conditional flood-routing scenarios at UHE Jurumirim, UHE Paranapanema, and UHE Piraju and around Piraju, Brazil. The user expects to see the water move and spread over terrain in a physically based simulation, with a view or exportable animation, not an AI-generated video.
 
 ## Non-negotiable scientific scope
 
@@ -9,7 +11,7 @@ You are improving a Linux-only, reproducible ANUGA 2D shallow-water model starte
 - A modeled inundation extent is conditional on DEM, bathymetry, structures, roughness, initial water level, inlet hydrograph, and boundary conditions. Do not claim it proves impossibility for every conceivable event.
 - The three UHE/reaches require distinct source data and configurations. Do not imply that three independent runs constitute a coupled cascade model.
 - Keep restricted PSB/PAE files, confidential project reports, and all large raw datasets out of Git. Do not upload documents to external services without the user's explicit instruction.
-- Target Linux. Do not depend on Windows-only desktop applications.
+- Target Linux and macOS (on macOS install ANUGA from conda-forge; pip builds fail on OpenMP). Do not depend on Windows-only desktop applications.
 
 ## Engineering tasks
 

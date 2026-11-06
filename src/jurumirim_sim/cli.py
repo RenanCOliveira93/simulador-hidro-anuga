@@ -55,6 +55,42 @@ def _interpolated_flow(times: list[float], flows: list[float]):
     return flow
 
 
+def _domain_from_dem(anuga, dem_path: Path, maximum_triangle_area: float):
+    """Triangular mesh over the DEM rectangle, elevation sampled bilinearly from the raster.
+
+    Fails explicitly on a geographic/unknown CRS (metres required) and on excessive nodata.
+    Returns (domain, (x0, y0)): the mesh uses local coordinates, x0/y0 is the DEM's lower-left corner in the raster CRS.
+    """
+    import numpy as np
+    import rasterio
+    from scipy.interpolate import RegularGridInterpolator
+
+    with rasterio.open(dem_path) as src:
+        if src.crs is None or not src.crs.is_projected:
+            raise ValueError("DEM needs a projected CRS in metres (e.g. EPSG:31982); got " + str(src.crs))
+        z = src.read(1, masked=True).astype("float64")
+        left, bottom, right, top = src.bounds
+        res_x, res_y = src.res
+    bad = np.ma.getmaskarray(z) | ~np.isfinite(z.filled(np.nan))
+    if bad.mean() > 0.01:
+        raise ValueError(f"DEM has {bad.mean():.1%} nodata cells; fill or clip it before running")
+    zf = z.filled(np.nan)
+    zf[bad] = np.nanmin(zf)
+    # raster rows go north->south; interpolator wants ascending axes
+    xs = left + res_x * (np.arange(zf.shape[1]) + 0.5) - left
+    ys = (top - res_y * (np.arange(zf.shape[0]) + 0.5)) - bottom
+    interp = RegularGridInterpolator((ys[::-1], xs), zf[::-1, :], bounds_error=False, fill_value=None)
+
+    width, height = right - left, top - bottom
+    domain = anuga.create_domain_from_regions(
+        [[0.0, 0.0], [width, 0.0], [width, height], [0.0, height]],
+        boundary_tags={"bottom": [0], "right": [1], "top": [2], "left": [3]},
+        maximum_triangle_area=maximum_triangle_area,
+    )
+    domain.set_quantity("elevation", function=lambda x, y: interp(np.column_stack([y, x])))
+    return domain, (left, bottom)
+
+
 def run(config_path: Path) -> Path:
     config_path = config_path.resolve()
     with config_path.open("rb") as stream:
@@ -100,11 +136,10 @@ def run(config_path: Path) -> Path:
     output_dir = _resolve(base, output["directory"])
     output_dir.mkdir(parents=True, exist_ok=True)
     label = str(output.get("label", "scenario"))
-    domain = anuga.create_domain_from_dem(
-        str(dem_path),
-        maximum_triangle_area=float(model["maximum_triangle_area_m2"]),
-        verbose=True,
-    )
+    domain, (x0, y0) = _domain_from_dem(anuga, dem_path, float(model["maximum_triangle_area_m2"]))
+    inlet_line = [[x - x0, y - y0] for x, y in inlet_line]  # mesh lives in a local frame anchored at the DEM corner
+    if int(model.get("multiprocessor_mode", 1)) == 2:
+        domain.set_multiprocessor_mode(2)  # OpenMP; thread count from OMP_NUM_THREADS
     domain.set_name(label)
     domain.set_datadir(str(output_dir))
     domain.set_quantity("friction", float(model["manning_n"]))

@@ -7,11 +7,15 @@ name = "simulador-hidro-anuga"
 version = "0.1.0"
 description = "Linux-first ANUGA runner for transparent, user-specified flood-routing scenarios"
 requires-python = ">=3.11"
-dependencies = ["anuga>=4.0", "shapely>=2.0", "matplotlib>=3.7", "pillow>=10"]
+dependencies = ["anuga>=4.0", "shapely>=2.0", "matplotlib>=3.7", "pillow>=10", "rasterio", "scipy", "geopandas>=1.0", "plotly>=5.20"]
 
 [project.scripts]
 simulador-hidro = "jurumirim_sim.cli:main"
 simulador-animar = "jurumirim_sim.animate:main"
+simulador-hidrograma = "jurumirim_sim.hydrograph:main"
+simulador-dem = "jurumirim_sim.prepare_dem:main"
+simulador-impacto = "jurumirim_sim.impact:main"
+simulador-visualizar = "jurumirim_sim.visualize:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

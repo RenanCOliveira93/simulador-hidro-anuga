@@ -1,0 +1,14 @@
+{
+  "label": "jur_7007hm3_72h_24h",
+  "engine": "ANUGA",
+  "dem": "/Users/renan.oliveira/Documents/Renan/NexusSight/Desenvolvimento/AgroTech/simulador-hidro-anuga/data/dem.tif",
+  "inlet": "/Users/renan.oliveira/Documents/Renan/NexusSight/Desenvolvimento/AgroTech/simulador-hidro-anuga/data/inlet.geojson",
+  "hydrograph": "/Users/renan.oliveira/Documents/Renan/NexusSight/Desenvolvimento/AgroTech/simulador-hidro-anuga/data/hydrograph.csv",
+  "hydrograph_peak_m3s": 54070.37037,
+  "hydrograph_volume_m3_trapezoidal": 7007520000.00066,
+  "duration_seconds": 86400.0,
+  "manning_n": 0.04,
+  "maximum_triangle_area_m2": 10000.0,
+  "boundary_condition": "transmissive on configured outer boundary tags",
+  "interpretation": "exploratory conditional scenario; not a breach probability or validated forecast"
+}

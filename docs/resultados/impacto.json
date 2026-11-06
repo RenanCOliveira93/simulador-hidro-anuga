@@ -1,0 +1,80 @@
+{
+  "sww": "output/jur_7007hm3_72h_24h.sww",
+  "municipio": "Piraju",
+  "simulated_hours": 24.0,
+  "areas_km2": {
+    "municipio": 505.7287166194322,
+    "municipio_dentro_do_dominio": 426.94756612817514,
+    "urbana": 8.333282874556387,
+    "rural": 497.39543374487624
+  },
+  "by_threshold": [
+    {
+      "profundidade_max_m_acima_de": 0.1,
+      "urbana": {
+        "area_km2": 0.762,
+        "fracao": 0.0914
+      },
+      "rural": {
+        "area_km2": 72.882,
+        "fracao": 0.1465
+      },
+      "municipio": {
+        "area_km2": 73.644,
+        "fracao": 0.1456
+      }
+    },
+    {
+      "profundidade_max_m_acima_de": 0.5,
+      "urbana": {
+        "area_km2": 0.747,
+        "fracao": 0.0896
+      },
+      "rural": {
+        "area_km2": 72.004,
+        "fracao": 0.1448
+      },
+      "municipio": {
+        "area_km2": 72.751,
+        "fracao": 0.1439
+      }
+    },
+    {
+      "profundidade_max_m_acima_de": 1.0,
+      "urbana": {
+        "area_km2": 0.741,
+        "fracao": 0.0889
+      },
+      "rural": {
+        "area_km2": 70.963,
+        "fracao": 0.1427
+      },
+      "municipio": {
+        "area_km2": 71.704,
+        "fracao": 0.1418
+      }
+    },
+    {
+      "profundidade_max_m_acima_de": 2.0,
+      "urbana": {
+        "area_km2": 0.683,
+        "fracao": 0.082
+      },
+      "rural": {
+        "area_km2": 69.052,
+        "fracao": 0.1388
+      },
+      "municipio": {
+        "area_km2": 69.735,
+        "fracao": 0.1379
+      }
+    }
+  ],
+  "pico_no_municipio": {
+    "prof_max_m": 54.5557861328125,
+    "hora_do_pico": 18.5,
+    "prof_no_ultimo_passo_m": 54.2130126953125,
+    "ainda_subindo_no_fim": false
+  },
+  "nota": "Condicional ao DEM (Copernicus 30 m, sem batimetria), ao hidrograma assumido e as bordas transmissivas. Area 'urbana' = poligonos IBGE 2019 (todos os tipos) dentro do municipio. Nao e previsao."
+}

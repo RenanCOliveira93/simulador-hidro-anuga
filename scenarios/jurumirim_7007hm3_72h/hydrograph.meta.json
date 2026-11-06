@@ -1,0 +1,10 @@
+{
+  "shape": "triangular",
+  "target_volume_m3": 7007520000.0,
+  "hydrograph_volume_m3": 7007520000.000002,
+  "relative_error": 2.7218597061620945e-16,
+  "peak_m3s": 54070.37037037037,
+  "emptying_time_h": 72.0,
+  "mean_m3s": 27035.185185185186,
+  "note": "Prescribed-volume scenario; not a breach hydrograph nor a prediction."
+}

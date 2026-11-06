@@ -1,0 +1,16 @@
+# Cenário HIPOTÉTICO de volume liberado: 7.007,52 hm³ (volume no N.A. máx. normal, PAE Jurumirim) esvaziados em 72 h.
+# Não é ruptura nem previsão. Paths relativos a este arquivo. O DEM (data/dem.tif) é local; veja docs/RESULTADOS_JURUMIRIM_7007HM3.md.
+[inputs]
+dem = "../../data/dem.tif"
+inlet_geojson = "inlet.geojson"
+hydrograph_csv = "hydrograph.csv"
+[model]
+maximum_triangle_area_m2 = 10000.0
+manning_n = 0.04
+duration_seconds = 86400.0
+yieldstep_seconds = 600.0
+multiprocessor_mode = 2
+boundary_tags = ["bottom", "right", "top", "left"]
+[output]
+directory = "../../output"
+label = "jur_7007hm3_72h_24h"
