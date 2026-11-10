@@ -1,5 +1,5 @@
 # Cenário HIPOTÉTICO de volume liberado: 7.007,52 hm³ (volume no N.A. máx. normal, PAE Jurumirim) esvaziados em 72 h.
-# Não é ruptura nem previsão. Paths relativos a este arquivo. O DEM (data/dem.tif) é local; veja docs/RESULTADOS_JURUMIRIM_7007HM3.md.
+# Não é ruptura nem previsão. Paths relativos a este arquivo. O DEM (data/dem.tif) é local; veja docs/TECHNICAL_GUIDE.md.
 [inputs]
 dem = "../../data/dem.tif"
 inlet_geojson = "inlet.geojson"
